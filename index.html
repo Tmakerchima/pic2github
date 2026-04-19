@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>我的小农场相册</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 天空 -->
+  <div class="sky">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <div class="sun"></div>
+  </div>
+
+  <!-- 主标题 -->
+  <header class="farm-header">
+    <div class="sign">
+      <span class="sign-icon">🌻</span>
+      <h1>我的小农场相册</h1>
+      <span class="sign-icon">🌻</span>
+    </div>
+  </header>
+
+  <!-- 画廊区域 -->
+  <main class="farm-field">
+    <!-- 篱笆顶部 -->
+    <div class="fence fence-top">
+      <span class="fence-post"></span><span class="fence-post"></span><span class="fence-post"></span>
+      <span class="fence-post"></span><span class="fence-post"></span><span class="fence-post"></span>
+      <span class="fence-post"></span><span class="fence-post"></span><span class="fence-post"></span>
+      <span class="fence-post"></span><span class="fence-post"></span><span class="fence-post"></span>
+    </div>
+
+    <!-- 搜索 & 筛选栏 -->
+    <div class="toolbar">
+      <input type="text" id="search" placeholder="🔍 搜索图片..." />
+      <select id="sort">
+        <option value="default">默认排序</option>
+        <option value="name">按名称</option>
+        <option value="reverse">倒序</option>
+      </select>
+    </div>
+
+    <!-- 图片数量统计 -->
+    <div class="stats" id="stats">正在加载农场...</div>
+
+    <!-- 图片网格 -->
+    <div class="gallery-grid" id="gallery"></div>
+
+    <!-- 空状态 -->
+    <div class="empty-state" id="empty-state" style="display:none">
+      <div class="empty-icon">🐥</div>
+      <p>农场里还没有照片哦，快来上传吧！</p>
+    </div>
+
+    <!-- 篱笆底部 -->
+    <div class="fence fence-bottom">
+      <span class="fence-post"></span><span class="fence-post"></span><span class="fence-post"></span>
+      <span class="fence-post"></span><span class="fence-post"></span><span class="fence-post"></span>
+      <span class="fence-post"></span><span class="fence-post"></span><span class="fence-post"></span>
+      <span class="fence-post"></span><span class="fence-post"></span><span class="fence-post"></span>
+    </div>
+  </main>
+
+  <!-- 地面装饰 -->
+  <div class="ground">
+    <div class="grass"></div>
+    <div class="decorations">
+      <span class="deco" style="left:5%">🌾</span>
+      <span class="deco" style="left:15%">🐄</span>
+      <span class="deco" style="left:28%">🌻</span>
+      <span class="deco" style="left:42%">🐓</span>
+      <span class="deco" style="left:55%">🌽</span>
+      <span class="deco" style="left:68%">🐑</span>
+      <span class="deco" style="left:80%">🌻</span>
+      <span class="deco" style="left:90%">🌾</span>
+    </div>
+  </div>
+
+  <!-- 灯箱模态框 -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lb-close">✕</button>
+    <button class="lightbox-nav lightbox-prev" id="lb-prev">‹</button>
+    <div class="lightbox-content">
+      <img id="lb-img" src="" alt="" />
+      <div class="lightbox-caption" id="lb-caption"></div>
+    </div>
+    <button class="lightbox-nav lightbox-next" id="lb-next">›</button>
+  </div>
+
+  <script src="gallery.js"></script>
+</body>
+</html>
