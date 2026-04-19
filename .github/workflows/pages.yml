@@ -1,0 +1,49 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate images.json
+        run: |
+          cd img
+          files=$(ls *.{jpg,jpeg,png,gif,webp,avif,svg,bmp} 2>/dev/null | sort)
+          echo "[" > ../images.json
+          first=true
+          for f in $files; do
+            if [ "$first" = true ]; then first=false; else echo "," >> ../images.json; fi
+            echo "  \"$f\"" >> ../images.json
+          done
+          echo "]" >> ../images.json
+          cat ../images.json
+
+      - name: Commit images.json if changed
+        if: github.event_name == 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add images.json
+          git diff --cached --quiet || git commit -m "chore: update images.json [skip ci]"
+          git push
+
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'push'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          exclude_assets: '.github'
